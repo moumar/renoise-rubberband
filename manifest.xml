@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RenoiseScriptingTool doc_version="0">
+  <ApiVersion>5</ApiVersion>
+  <Id>com.renoise.Rubberband</Id>
+  <Version>0.11</Version>
+  <Author>Cly/Suva [clysuva@gmail.com]</Author>
+  <Name>Rubberband timestretch &amp; pitch shift</Name>
+  <Category>Sample Editor</Category>
+  <Description>Professional timestretching and pitch shifting utility, using the opensource timestretching utility Rubberband. 
+Adds "Timestretch..." and 'Pitch Shift...' entries into Renoises Sample Editor "Process" menu. 
+
+Allows the user to make precise time corrections to the samples to match the song tempo, or to create interesting effects like pad instruments from short stab sounds. This package includes windows and mac binaries, on linux, the rubberband utility must be installed manually by issuing a command "apt-get install rubberband" or what ever equivalent of your system.
+
+Rubberband is distributed under the terms of GPL and can be downloaded from http://www.breakfastquay.com/rubberband/
+  
+This script is distributed under the terms of MIT licence.
+  </Description>
+  <Homepage>http://tools.renoise.com</Homepage>
+</RenoiseScriptingTool>
