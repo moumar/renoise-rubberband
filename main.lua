@@ -66,7 +66,20 @@ function process_rubberband(cmd)
   if os.platform() == 'WINDOWS' then
     exe = '"' .. renoise.tool().bundle_path .. 'bin/win32/rubberband.exe"'
   elseif os.platform() == 'MACINTOSH' then
-    exe = '"' .. renoise.tool().bundle_path .. 'bin/osx/rubberband"'
+    local rubberband_cmd = io.popen("bash -ic 'which rubberband'")
+    local result = rubberband_cmd:read("*a")
+    rubberband_cmd:close()
+
+    if result:len() == 0 then
+      renoise.app():show_prompt('Rubberband is missing!',
+      "To use this feature you must install Rubberband command line utility\n"..
+      "you must install package rubberband with homebrew, you can do this by\n"..
+      "issuing a command: brew install rubberband\n\n"
+      , {'Ok'})
+      return
+    end
+
+    exe =  result:sub(0, result:len() - 1)
   else
     exe = 'rubberband'
   end
@@ -76,14 +89,12 @@ function process_rubberband(cmd)
 
   renoise.song().selected_sample.sample_buffer:save_as(ofile, 'wav')
 
-  os.execute(exe .. " " .. cmd .. " "..ofile.." "..ifile);
-
+  local res = os.execute(exe .. " " .. cmd .. " " .. ofile .. " " .. ifile);
   if not io.exists(ifile) then
     display_error()
-    return
+  else
+    renoise.song().selected_sample.sample_buffer:load_from(ifile)
   end
-
-  renoise.song().selected_sample.sample_buffer:load_from(ifile)
 
   os.remove(ofile)
   os.remove(ifile)
