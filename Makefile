@@ -1,6 +1,6 @@
 PACKAGE_NAME=com.renoise.rubberband
 VERSION_NO=`grep '<Version>' manifest.xml | sed 's/.*>\(.*\)<.*/\1/' | sed -e 's/\./_/g'`
-TARGET=$(shell echo $(PACKAGE_NAME)_V$(VERSION_NO).xrnx)
+TARGET=dist/$(shell echo $(PACKAGE_NAME)_V$(VERSION_NO).xrnx)
 FILES=manifest.xml *.lua bin/
 
 $(TARGET): $(FILES)
